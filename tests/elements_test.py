@@ -1,5 +1,6 @@
 import time
-from pages.elements_page import TextBoxPage
+from pages.elements_page import TextBoxPage, CheckboxPage
+
 
 class TestElement:
     class TestTextBox:
@@ -13,3 +14,12 @@ class TestElement:
             assert input_curr_adrr == output_curr_adrr, f"{input_curr_adrr} does not equal to {input_curr_adrr}"
             assert input_per_addr == output_per_addr, f"{input_per_addr} does not equal to {input_per_addr}"
 
+    class TestCheckBox:
+        def test_checkbox(self, driver):
+            checkbox_page = CheckboxPage(driver, 'https://demoqa.com/checkbox')
+            checkbox_page.open()
+            checkbox_page.open_full_list()
+            checkbox_page.click_random_checkbox()
+            input_checkbox = checkbox_page.get_checked_checkboxes()
+            output_results = checkbox_page.get_output_result()
+            assert input_checkbox == output_results, "The checkboxes have nt been selected"
